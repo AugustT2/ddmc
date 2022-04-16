@@ -100,11 +100,15 @@ public class PackageOrder {
         PackageOrder params = new PackageOrder();
         PaymentOrder payment_order = new PaymentOrder();
         payment_order.setPrice(data.getTotalMoney());
+        //是否需要运费
         boolean needPayFreight = Double.parseDouble(data.getTotalMoney()) < Double.parseDouble(data.getFullToOff());
         if (needPayFreight) {
             payment_order.setPrice(String.valueOf(Double.parseDouble(payment_order.getPrice()) + Double.parseDouble(data.getFreightMoney())));
         }
-        payment_order.setFreight_discount_money("0.00");
+        /**
+         * 减免运费金额： 如果是plus会员，当天第一次购物不足门槛金额可能有值，这而有优化空间
+         */
+        payment_order.setFreight_discount_money(data.getFreightDiscountMoney());
         payment_order.setFreight_money(data.getFreightMoney());
         payment_order.setOrder_freight(needPayFreight ? data.getFreightMoney() : "0.00");
         payment_order.setParent_order_sign(data.getParentOrderInfo().getParentOrderSign());
@@ -124,6 +128,7 @@ public class PackageOrder {
             product.setCount(e.getCount());
             product.setCart_id(e.getCartId());
             product.setPrice(e.getAddPrice());
+            //这个字段是干什么的，没找到
             product.setDelivery_date_tag("");
             product.setProduct_type(e.getProductType());
             product.setIs_booking(e.getIsBooking());
@@ -142,13 +147,14 @@ public class PackageOrder {
         pkg.setCart_count(data.getCartCount());
         pkg.setIs_presale(0);
         pkg.setInstant_rebate_money(data.getInstantRebateMoney());
-        pkg.setTotal_rebate_money("0.00");
+        pkg.setTotal_rebate_money(data.getTotalRebateMoney());
         pkg.setUsed_balance_money("0.00");
         pkg.setUsed_point_num(0);
         pkg.setUsed_point_money("0.00");
         pkg.setIs_share_station(0);
         pkg.setOnly_today_products(new ArrayList<>());
         pkg.setOnly_tomorrow_products(new ArrayList<>());
+        //这里的packagetype我的是1
         pkg.setPackage_type(2);
         pkg.setPackage_id(1);
         pkg.setFront_package_type(0);

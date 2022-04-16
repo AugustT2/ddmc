@@ -31,12 +31,16 @@ public class FetchCartResult extends BaseResponseResult {
         private String orderProductListSign;
         @JSONField(name = "full_to_off")
         private String fullToOff;
+        @JSONField(name = "freight_discount_money;")
+        private String freightDiscountMoney;
         @JSONField(name = "freight_money")
         private String freightMoney;
         @JSONField(name = "free_freight_type")
         private Integer freeFreightType;
         @JSONField(name = "instant_rebate_money")
         private String instantRebateMoney;
+        @JSONField(name = "total_rebate_money")
+        private String totalRebateMoney;
         @JSONField(name = "goods_real_money")
         private String goodsRealMoney;
         @JSONField(name = "total_money")

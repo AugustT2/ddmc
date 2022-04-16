@@ -17,11 +17,11 @@ public class Entry {
     public static void main(String[] args) {
         init();
         System.out.println("当前购物车商品:\n" + fetchCartResult.preview());
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("已刷新购物车是否继续？(Y/N)");
-        if (!"Y".equals(scanner.nextLine())) {
-            System.exit(0);
-        }
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("已刷新购物车是否继续？(Y/N)");
+//        if (!"Y".equals(scanner.nextLine())) {
+//            System.exit(0);
+//        }
         int threadCount = 4;
         while (threadCount-- > 0) {
             new Thread(Entry::action).start();
